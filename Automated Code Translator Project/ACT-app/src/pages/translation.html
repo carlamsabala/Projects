@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A.C.T - Translation</title>
+
+  <link rel="stylesheet" href="../assets/stylesheets/menuguide.css">
+  <link rel="stylesheet" href="../assets/stylesheets/translation.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/Images/favicon.ico" type="image/x-icon">
+
+
+  <!-- Tippy.js Core Styles + Script -->
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+
+  <!-- CodeMirror Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/xq-light.min.css">
+
+<!-- CodeMirror Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/pascal/pascal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/display/placeholder.min.js"></script>
+
+
+  <!-- Include Axios from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <style>
+    .spinner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.8);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+    }
+
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #555;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>A.C.T Desktop</h1>
+        <div class="settings">
+          <!-- Logout Button as Image -->
+          <img src="/assets/Images/logout.png" alt="Logout" data-tippy-content="Securely log out and end your session with ACT" class="navbar-icon" onclick="logout()">
+        </div>
+      </div>
+
+    <div class="sidebar">
+        <ul>
+            <li class="menu-item">
+                <button class="menu-button" onclick="location.href='home.html'">
+                    <img src="/assets/Images/home-icon.png" alt="Home" class="menu-image">
+                    <span class="menu-text">Home</span>
+                </button>
+            </li>
+            <li class="menu-item active">
+                <button class="menu-button">
+                    <img src="/assets/Images/copy-paste-icon.png" alt="Copy & Paste" class="menu-image">
+                    <span class="menu-text">Translator</span>
+                </button>
+            </li>
+            <li class="menu-item">
+                <button class="menu-button" onclick="location.href='fileDrive.html'">
+                    <img src="/assets/Images/file-drive-icon.png" alt="File Drive" class="menu-image">
+                    <span class="menu-text">File Drive</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div id = "content" class="content">
+        <div class="header-container">
+            <h2>Translator</h2>
+            <!-- File Upload Section -->
+            <div class="file-upload-container" id="fileUploadContainer">
+              <img src="/assets/Images/upload.png" alt="Upload Icon" class="upload-icon">
+              <p id="dropMessage">Drag and drop files here</p>
+              <span class="bold-or"> OR </span>
+              <button class="browse-file" id="browseFile" data-tippy-content="Upload a file from your Computer">Browse Files</button>
+              <input type="file" id="fileInput" accept=".dpr,.pas" style="display: none;">
+            </div>
+        </div>
+
+        <!-- Translation Section -->
+        <div id="translation" class="translator-container">
+            <div class="textbox-container">
+                <textarea id="delphiEditor"></textarea>
+                <div class="button-container">
+                  <button class="translate-button" data-tippy-content="Translate Delphi to C#"  onclick="translateCode()">Translate</button>
+                </div>
+              </div>
+
+            <!-- C# Output -->
+            <div class="textbox-container">
+                <textarea id="csharpEditor" readonly></textarea>
+                <div class="button-container">
+                  <button class="download-button"  data-tippy-content="Download translated C# code as a .cs file"  onclick="downloadCSharp()">
+                    <img src="../assets/Images/download.png" class="button-icon" alt="Download">
+                    <span>Download .cs</span>
+                  </button>
+                  <button class="copy-button" data-tippy-content="Copy the C# to Clipboard"  onclick="copyToClipboard()">
+                    <img src="../assets/Images/copy-icon.png" class="button-icon" alt="Copy">
+                    <span id="copy-text">Copy</span>
+                  </button>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <!-- 🔄 Loading Spinner -->
+    <div id="loading-spinner" class="spinner hidden">
+      <div class="loader"></div>
+      <p>Translating your code...</p>
+    </div>
+
+    <script src="../scripts/fileUpload.js"></script>
+
+    <script>
+      let delphiEditor;
+      let csharpEditor;
+
+      document.addEventListener('DOMContentLoaded', () => {
+          delphiEditor = CodeMirror.fromTextArea(document.getElementById("delphiEditor"), {
+              mode: "text/x-pascal",
+              theme: "xq-light",
+              lineNumbers: true,
+              placeholder: "Type Delphi Code Here..."
+          });
+
+          csharpEditor = CodeMirror.fromTextArea(document.getElementById("csharpEditor"), {
+              mode: "text/x-csharp",
+              theme: "xq-light",
+              lineNumbers: true,
+              readOnly: true,
+              placeholder: "Translated C# will appear here!"
+          });
+
+          const delphi = localStorage.getItem('delphiCode');
+          const csharp = localStorage.getItem('csharpCode');
+
+          if (delphi) {
+              delphiEditor.setValue(delphi);
+          }
+          if (csharp) {
+              csharpEditor.setValue(csharp);
+          }
+
+          delphiEditor.refresh();
+          csharpEditor.refresh();
+
+          localStorage.removeItem('delphiCode');
+          localStorage.removeItem('csharpCode');
+      });
+    </script>
+
+    <!-- Floating Feedback Button -->
+    <button class="floating-feedback-button"
+        data-tippy-content="Submit Feedback or Questions"
+        onclick="window.location.href='mailto:2msgactdev@gmail.com?subject=ACT App Feedback&body=Please describe your issue or suggestion here.'"
+        >
+        ❔
+    </button>
+    <!-- Reference the external translate.js script -->
+    <script src="../scripts/tooltip.js"></script>
+    <script src="../scripts/translate.js"></script>
+
+    <div id="dropOverlay" class="dropOverlay hidden">Drop your .dpr file here</div>
+
+
+</body>
+</html>

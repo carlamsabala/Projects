@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A.C.T</title>
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self' https://www.googleapis.com;
+    script-src 'self' 'unsafe-inline' https://www.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;">
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#007bff">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../assets/stylesheets/styleguide.css">
+  <link rel="stylesheet" href="../assets/stylesheets/index.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/Images/favicon.ico" type="image/x-icon">
+  
+  <img src="../assets/stylesheets/background.svg" class="background-svg" alt="Background" />
+
+  <!-- Register Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("../service-worker.js")
+        .then((registration) => {
+          console.log("Service Worker registered with scope:", registration.scope);
+        })
+        .catch((error) => {
+          console.error("Service Worker Registration Failed:", error);
+        });
+    }
+  </script>
+</head>
+<body>
+  <div class="login">
+    <!-- Animated A.C.T Title -->
+    <div class="logo">
+      <h1 class="styled-title" data-text="A.C.T">A.C.T</h1>
+    </div>
+    <h3>Automated Code Translation</h3>
+    <div class="login-form">
+      <button class="main-button" id="authButton">SSO with Authentik</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("authButton").addEventListener("click", () => {
+      // Redirect to the OIDC login route which will trigger Authentik's login/registration UI.
+      window.location.href = "/auth/login";
+    });
+  </script>
+</body>
+</html>

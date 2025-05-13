@@ -1,0 +1,166 @@
+openapi: 3.0.4
+info:
+  title: ACT - Automated Code Translator
+  description: |
+    This is the OpenAPI specification for the Automated Code Translation platform. It supports user authentication (via OIDC), translation of Delphi Pascal to C# using RAG and OpenAI, and persistence of translations via CouchDB.
+  version: 1.0.0
+  contact:
+    email: 2msgactdev@gmail.com
+servers:
+  - url: http://localhost:3000
+    description: Main Web Application Server
+  - url: http://localhost:5000
+    description: Python Translation Microservice (RAG + OpenAI)
+
+paths:
+  /translate:
+    post:
+      summary: Translate Delphi to C# using RAG + GPT
+      tags:
+        - Translation (Python Flask API)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - delphi_code
+              properties:
+                delphi_code:
+                  type: string
+                  example: "procedure Greet; begin Writeln('Hello, World!'); end;"
+      responses:
+        '200':
+          description: Successful translation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  translated_csharp:
+                    type: string
+        '400':
+          description: Missing Delphi code
+        '500':
+          description: Server error
+
+  /save-translation:
+    post:
+      summary: Save translated code to CouchDB
+      tags:
+        - Node.js Express API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - delphiCode
+                - csharpCode
+              properties:
+                delphiCode:
+                  type: string
+                csharpCode:
+                  type: string
+                documentTitle:
+                  type: string
+      responses:
+        '200':
+          description: Translation saved
+        '500':
+          description: Server error
+
+  /get-translations:
+    get:
+      summary: Retrieve all translations from CouchDB
+      tags:
+        - Node.js Express API
+      responses:
+        '200':
+          description: List of translations
+        '500':
+          description: Server error
+
+  /get-translation/{id}:
+    get:
+      summary: Retrieve a specific translation by ID
+      tags:
+        - Node.js Express API
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Single translation document
+        '500':
+          description: Error retrieving document
+
+  /delete-translation/{id}:
+    delete:
+      summary: Delete translation by ID
+      tags:
+        - Node.js Express API
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deletion successful
+        '500':
+          description: Deletion failed
+
+  /update-translation/{id}:
+    put:
+      summary: Update the document title of a translation
+      tags:
+        - Node.js Express API
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                documentTitle:
+                  type: string
+      responses:
+        '200':
+          description: Title updated
+        '400':
+          description: Bad request
+        '500':
+          description: Server error
+
+  /auth/status:
+    get:
+      summary: Check current authentication status
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: Auth status returned
+
+  /api/user-info:
+    get:
+      summary: Retrieve authenticated user's information
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: User info (username, email)
+        '401':
+          description: Unauthorized

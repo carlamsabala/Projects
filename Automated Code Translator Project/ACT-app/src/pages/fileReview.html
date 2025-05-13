@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A.C.T - File Review</title>
+  <link rel="stylesheet" href="../assets/stylesheets/menuguide.css">
+  <link rel="stylesheet" href="../assets/stylesheets/fileReview.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/Images/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <div class="navbar">
+        <h1>A.C.T Desktop</h1>
+        <div class="settings">
+            <img src="/assets/Images/logout.png" alt="Logout" class="navbar-icon" onclick="logout()">
+        </div>
+    </div>
+  </div>
+
+    <div class="sidebar">
+        <ul>
+            <li class="menu-item">
+                <button class="menu-button" onclick="location.href='home.html'">
+                    <img src="/assets/Images/home-icon.png" alt="Home" class="menu-image">
+                    <span class="menu-text">Home</span>
+                </button>
+            </li>
+            <li class="menu-item">
+                <button class="menu-button" onclick="location.href='translation.html'">
+                    <img src="/assets/Images/copy-paste-icon.png" alt="Copy & Paste" class="menu-image">
+                    <span class="menu-text">Translator</span>
+                </button>
+            </li>
+            <!-- <li class="menu-item active">
+                <button class="menu-button">
+                    <img src="/assets/Images/file-review-icon.png" alt="File Review" class="menu-image">
+                    <span class="menu-text">File Review</span>
+                </button>
+            </li> -->
+            <li class="menu-item">
+                <button class="menu-button" onclick="location.href='fileDrive.html'">
+                    <img src="/assets/Images/file-drive-icon.png" alt="File Drive" class="menu-image">
+                    <span class="menu-text">File Drive</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="title-row">
+            <h2 class="file-review-title">File Review • </h2>
+            <div class="document-title" id="documentTitle"></div>
+        </div>
+
+        <div class ="search-and-buttons">
+            <div class="button-container">
+                <button class="download-button" onclick="downloadCSharp()">
+                    <img src="../assets/Images/download.png" alt="Download" class="button-icon">
+                    <span>Download .cs</span>
+                </button>
+
+                <button class="copy-button" onclick="copyToClipboard()">
+
+                    <img src="../assets/Images/copy-icon.png" alt="Copy" class="button-icon">
+                    <span id="copy-text">Copy</span>
+
+                </button>
+            </div>
+
+            <div class="search-container"> <!-- Search container on the right -->
+                <div class="tooltip">
+                    <img src="/assets/Images/info-icon.png" alt="Info" class="tool-tip-icon">
+                    <span class="tooltiptext">Search for keywords, functions, comments, etc.</span>
+                </div>
+                <div class="search-box">
+                    <img src="/assets/Images/search-icon.png" alt="Search" class="search-icon">
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+        </div>
+        <div class="search-box">
+          <img src="../assets/Images/search-icon.png" alt="Search" class="search-icon">
+          <input type="text" placeholder="Search">
+        </div>
+      </div>
+    </div>
+
+    <!-- File Review Container -->
+    <div class="file-review-container">
+      <textarea class="text-box" id="reviewCode" placeholder="Translation Code"></textarea>
+    </div>
+  </div>
+
+    <!-- Script to load the selected translation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+          const params = new URLSearchParams(window.location.search);
+          const docId = params.get('docId');
+
+          if (!docId) return; // No docId, nothing to load
+
+          try {
+            const response = await fetch(`http://localhost:3000/get-translation/${docId}`);
+            const data = await response.json();
+            if (data.success) {
+                const { csharpCode, documentTitle } = data.translation;
+
+                // Update the header
+                // const titleElement = document.getElementById('fileReviewTitle');
+                // titleElement.textContent = `File Review for ${documentTitle || "Untitled"}`;
+                document.getElementById('documentTitle').textContent =
+                data.translation.documentTitle || "Untitled Document";
+
+                // Display the csharpCode in the textarea
+                document.getElementById('reviewCode').value = data.translation.csharpCode;
+            } else {
+                console.error("Failed to fetch translation:", data.error);
+            }
+          } catch (error) {
+            console.error("Error fetching translation:", error);
+          }
+        });
+
+        function copyToClipboard() {
+            // Get the text from the textarea with id "csharpCode"
+            const text = document.getElementById('reviewCode').value;
+            // Use the Clipboard API to copy the text
+            navigator.clipboard.writeText(text) .then(() => {
+                // Optionally update the UI to indicate success, e.g., change button text/icon
+                console.log('Text copied to clipboard successfully!');
+                // Example: change the button text to "Copied!"
+                const copyButton = document.querySelector('.copy-button span');
+                if (copyButton) { copyButton.textContent = 'Copied'; } }) .catch((error) => { console.error('Error copying text: ', error);
+
+            });
+        }
+
+        function downloadCSharp() {
+            const csharpCode = document.getElementById('reviewCode').value;
+
+            // ensure there's code to download
+            if (!csharpCode.trim()) {
+                alert("No C# code available for download!");
+                return;
+            }
+
+            // get c# string
+            const blob = new Blob([csharpCode], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'translated.cs';  // downloadable file name
+            document.body.appendChild(link);
+
+            // trigger the download
+            link.click();
+
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

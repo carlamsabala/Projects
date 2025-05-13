@@ -1,0 +1,46 @@
+h1{
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  color: var(--light);
+  font-size: 145px;
+  text-align:center;
+}
+h1::before{
+  content: attr(data-text);
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  color: var(--dark);
+  z-index: -1;
+  transition: 0.2s;
+}
+h1:hover::before{
+  top: 0.04em;
+  left: 0.04em;
+}
+h1::after{
+  content: attr(data-text);
+  position: absolute;
+  color: transparent;
+  top: 0em;
+  left: 0em;
+  background-image: linear-gradient(to bottom, var(--highlight), var(--highlight2));  background-size: 8px 45px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 1px whitesmoke;
+  transition: 0.2s;
+}
+h1:hover::after{
+  top: -0.03em;
+  left: -0.03em;
+}
+
+.background-svg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  object-fit: cover; /* Make sure it scales */
+}

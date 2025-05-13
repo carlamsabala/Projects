@@ -1,0 +1,10 @@
+FROM ghcr.io/goauthentik/server:2025.2.0
+
+
+#Switch to root user
+USER root
+
+# Install curl and ping utilities
+RUN apt-get update && apt-get install -y curl iputils-ping
+
+CMD [ "dumb-init", "--", "ak", "server" ]

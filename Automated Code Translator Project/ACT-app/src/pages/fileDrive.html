@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.C.T - File Drive</title>
+    <link rel="stylesheet" href="../assets/stylesheets/menuguide.css">
+    <link rel="stylesheet" href="../assets/stylesheets/fileDrive.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/Images/favicon.ico" type="image/x-icon">
+     <!-- Tippy.js Core Styles + Script -->
+     <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
+     <script src="https://unpkg.com/@popperjs/core@2"></script>
+     <script src="https://unpkg.com/tippy.js@6"></script>
+</head>
+<body>
+    <div class="navbar">
+        <h1>A.C.T Desktop</h1>
+        <div class="settings">
+            <img src="/assets/Images/logout.png" alt="Logout" data-tippy-content="Securely log out and end your session with ACT" class="navbar-icon" onclick="logout()">
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <ul>
+            <li class="menu-item">
+                <button class="menu-button" onclick="location.href='home.html'">
+                    <img src="/assets/Images/home-icon.png" alt="Home" class="menu-image">
+                    <span class="menu-text">Home</span>
+                </button>
+            </li>
+            <li class="menu-item">
+                <button class="menu-button" onclick="location.href='translation.html'">
+                    <img src="/assets/Images/copy-paste-icon.png" alt="Copy & Paste" class="menu-image">
+                    <span class="menu-text">Translator</span>
+                </button>
+            </li>
+            <li class="menu-item active">
+                <button class="menu-button">
+                    <img src="/assets/Images/file-drive-icon.png" alt="File Drive" class="menu-image">
+                    <span class="menu-text">File Drive</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="header-container">
+            <h2>File Drive</h2>
+        </div>
+        <div class="search-toggle-container">
+            <div class="search-box">
+                <img src="../assets/Images/search-icon.png" alt="Search" class="search-icon">
+                <input type="text" id="searchInput" placeholder="Search by title">
+            </div>
+             <!-- View Toggle Buttons -->
+             <div class="view-toggle">
+                <button id="listViewBtn" data-tippy-content="List View" >
+                    <img src="../assets/Images/view-list.png" alt="List View" class="viewIcons">
+                </button>
+                <button id="gridViewBtn" data-tippy-content="Grid View">
+                    <img src="../assets/Images/grid.png" alt="Grid View" class="viewIcons">
+                </button>
+            </div>
+        </div>
+
+        <div class="table-header">
+            <span class="header-title" id="fileNameHeader">File Name</span>
+            <span class="header-date" id="lastModifiedHeader">Last Modified</span>
+        </div>
+
+        <div id="docList" class="listView">
+            <!-- translation list loaded here -->
+        </div>
+    </div>
+
+    <!-- Floating Feedback Button -->
+    <button class="floating-feedback-button"
+        data-tippy-content="Submit Feedback or Questions"
+        onclick="window.location.href='mailto:2msgactdev@gmail.com?subject=ACT App Feedback&body=Please describe your issue or suggestion here.'"
+        >
+        ❔
+    </button>
+
+    <script src="../scripts/tooltip.js"></script>
+    <script src="../scripts/fileDrive.js"></script>
+    <script src="../scripts/translate.js"></script>
+</body>
+</html>
+

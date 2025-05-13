@@ -1,0 +1,57 @@
+# 🚀 Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🚀 Environment files
+.env
+
+# 🚀 OS-generated files
+.DS_Store
+Thumbs.db
+
+# 🚀 Logs
+logs/
+*.log
+debug.log
+acces_log
+error_log
+
+
+# 🚀 SQLite Database Files (New)
+Database/translations.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+
+# 🚀 Express Sessions & Cache
+sessions/
+.cache/
+tmp/
+
+# 🚀 Build output (if applicable)
+dist/ 
+build/
+build/Release
+
+# 🚀 Test Coverage
+coverage/
+.nyc_output
+
+# 🚀 VSCode settings
+.vscode/
+
+# 🚀 System files and caches
+*.swp
+*.swo
+*.out
+*.pyc
+.node_repl_history
+.yarn-integrity
+.eslintcache
+
+
+docker-ref.txt
+repo.txt

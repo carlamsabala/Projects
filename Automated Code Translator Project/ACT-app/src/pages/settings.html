@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.C.T - Translation</title>
+
+    <link rel="stylesheet" href="../assets/stylesheets/settings.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/Images/favicon.ico" type="image/x-icon">
+
+
+</head>
+<body>
+    <div class="navbar">
+        <h1>A.C.T Desktop</h1>
+        <div class="settings">
+            <img src="/assets/Images/SettingsWhite.png" alt="Settings" onclick="location.href='settings.html'">
+            <img src="/assets/Images/profileicon.png" alt="Profile" id="profile-icon">
+            <img src="/assets/Images/logout.png" alt="Logout" class="navbar-icon" onclick="logout()">
+        </div>
+    </div>
+
+    <div id="profilePopup" class="profile-popup">
+        <p id="usernameDisplay"></p>
+        <button id="logoutButton">Logout</button>
+    </div>
+
+    <div class="content">
+        <div class="header-container">
+            <a href="translation.html">
+                <img src="/assets/Images/Back.png" alt="Back">
+            </a>
+            <div>Settings</div>
+        </div>
+    </div>
+    <div class="contentWrapper">
+        <nav>
+            <ul id="menu">
+                <li class="menu-item active" data-target="general">
+                    <img src="/assets/Images/General-active.png" class="menu-icon" data-default="../assets/Images/General.png" data-active="../assets/Images/General-active.png" alt="general">
+                    General
+                </li>
+                <li class="menu-item" data-target="format">
+                    <img src="/assets/Images/Format.png" class="menu-icon" data-default="../assets/Images/Format.png" data-active="../assets/Images/Format-active.png" alt="format">
+                    Format & Style
+                </li>
+                <li class="menu-item" data-target="export">
+                    <img src="/assets/Images/Export.png" class="menu-icon" data-default="../assets/Images/Export.png" data-active="../assets/Images/Export-active.png" alt="export">
+                    Export Styling
+                </li>
+            </ul>
+        </nav>
+        <div id="options">
+            <div id="general" class="content-section">General</div>
+            <div id="format" class="content-section" style="display: none;">Format & Style</div>
+            <div id="export" class="content-section" style="display: none;">Export Styling</div>
+        </div>
+    </div>
+
+    <script src="../scripts/translate.js"></script>
+
+
+</body>
+</html>
