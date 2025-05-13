@@ -1,0 +1,7 @@
+openai
+flask
+flask_cors
+python-dotenv
+faiss-cpu
+tqdm
+numpy

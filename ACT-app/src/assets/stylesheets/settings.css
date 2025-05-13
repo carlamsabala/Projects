@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+
+.contentWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+li img {
+    width: 38px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    padding: 20px 30px;
+}
+
+.menu-item:hover {
+    background-color: rgba(150,165,224,0.3);
+}
+
+.menu-item.active {
+    background-color: #96A5E0;
+    border-left: 5px solid #243C9B;
+    padding-left: 25px;
+}
+
+.content {
+    width: 100%;
+    border-bottom: 1px solid #818080;
+    padding-bottom: 32px;
+    padding-top: 80px;
+}
+
+.content img {
+    cursor: pointer;
+}
+
+.content div {
+    font-size: 28px;
+    color: black;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+}
+
+.content-section {
+    padding: 20px;
+    font-size: 18px;
+    display: block;
+}
+
+#options {
+    margin-top: 30px;
+}
+
+.header-container img {
+    height: 30px;
+    width: auto;
+    margin: auto 32px;
+}
+
+.settings-icon {
+    fill: white; /* Makes the icon white */
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+}
+
+ /* nav bar */
+ .navbar {
+    background-image: url("background.svg");
+    color: #fff;
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .navbar h1 {
+    font-size: 22px;
+    padding-left: 50px;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .navbar .settings img {
+    width: 24px; /* Set width of the images */
+    height: 24px; /* Set height of the images */
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 20px;
+    cursor: pointer; /* Optional: Makes the images look clickable */
+  }
+
+  #profile-icon {
+    margin-right: 30px;
+  }
+
+  /* Profile Popup Container */
+  .profile-popup {
+    position: absolute;
+    top: 60px;             /* Adjust based on your navbar height */
+    right: 20px;           /* Position relative to the right edge */
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    z-index: 1000;
+    display: none;         /* Hidden by default; toggled via JS */
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Username Display Styling */
+  .profile-popup p#usernameDisplay {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  /* Logout Button Styling */
+  .profile-popup button#logoutButton {
+    background-color: #007bff;  /* Blue background */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Button Hover State */
+  .profile-popup button#logoutButton:hover {
+    background-color: #0056b3;
+  }

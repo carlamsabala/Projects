@@ -1,0 +1,19 @@
+# Use an appropriate base image (e.g., for Python)
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy the requirements file and install dependencies
+COPY ACT-ml/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the API script (update the path if necessary)
+COPY ACT-ml/scripts/api.py ./api.py
+
+# FAISS & metadata for RAG
+COPY ACT-ml/faiss_index.index ./faiss_index.index
+COPY ACT-ml/indexed_metadata.jsonl ./indexed_metadata.jsonl
+
+EXPOSE 5000
+CMD ["python", "api.py"]

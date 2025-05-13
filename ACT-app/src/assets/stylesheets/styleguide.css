@@ -1,0 +1,148 @@
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --dark: rgb(23, 72, 156);
+  --darker: rgb(8, 17, 33);
+  --default: rgba(50, 90, 200, 1);
+  --light: rgb(185, 208, 248);
+  --highlight: rgba(80, 140, 255, 0.6);
+  --highlight2: rgba(50, 90, 200, 0.6);
+}
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+.wrapper {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 0 24px;
+  background-image: url("background.svg");
+  background-size: 2000px 1000px;
+  background-position: -500px 0;
+  color: #f9f9f9;
+  font-family: "Poppins", sans-serif;
+}
+
+
+/* Button Styles */
+.login-form button {
+  cursor: pointer;
+  background: #157ae1;
+  color: #f9f9f9;
+  border: 0;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+/* Button Hover & Click Effects */
+.login-form input:hover {
+  border-color: #157ae1;
+  box-shadow: 0 0 8px rgba(21, 122, 225, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+.login-form button:hover {
+  background: #1a5fdd;
+  transform: scale(1.005);
+  transition: all 0.3s ease-in-out;
+}
+
+.login-form button:active {
+  transform: scale(0.95);
+  background: #1349a3;
+}
+
+/* Inputs & Buttons */
+.login-form input,
+.login-form button {
+  width: 100%;
+  height: 60px;
+  outline: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.login-form input {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  font-size: 18px;
+  padding: 0 20px 0 50px;
+  color: inherit;
+}
+
+/* Input Focus Effects */
+.login-form input:focus {
+  border-color: #157ae1;
+}
+
+.login-form input:focus ~ span {
+  color: #157ae1;
+}
+
+/* Login Page Styles */
+.login {
+position: fixed;
+z-index: 3;
+top: 50%;
+left: 50%;
+translate: -50% -50%;
+width: 500px; /* Increase width */
+padding: 60px 50px 70px; /* Adjust padding to fit text */
+border-radius: 22px;
+background: var(--darker);
+text-align: center;
+}
+
+/* Adjust for responsiveness */
+@media (max-width: 600px) {
+  .login {
+    width: 90%; /* Keep it fluid on smaller screens */
+    padding: 100px 30px 50px;
+  }
+}
+
+.login > h2 {
+font-size: 36px;
+font-weight: 500;
+margin: 0 0 4px;
+}
+
+.login > h3 {
+color: rgba(255, 255, 255, 0.38);
+margin: 0 0 30px;
+font-weight: 500;
+font-size: 16px;
+}
+
+/* Login Form */
+.login-form {
+display: grid;
+gap: 16px;
+place-items: center;
+width: 100%;
+margin: 0;
+}
+
+
+.tippy-box[data-theme~='small'] {
+  font-size: 10px;         /* Smaller text */
+  padding: 4px 6px;         /* Less padding */
+  max-width: 150px;         /* Optional: restrict width */
+  border-radius: 4px;
+  background-color: #333;   /* Optional: consistent dark background */
+  color: white;
+}

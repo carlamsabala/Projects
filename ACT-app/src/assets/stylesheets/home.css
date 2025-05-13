@@ -1,0 +1,389 @@
+/* Welcome Section */
+.welcome-section {
+    margin-bottom: 2rem;
+}
+
+.welcome-section h2 {
+    margin-bottom: 0.5rem;
+}
+
+.welcome-section p {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Quick Actions - Compact Button Style */
+.quick-actions-horizontal {
+    display: flex;
+    gap: 2rem;
+    margin-left: 20px;
+    flex-wrap: wrap;
+}
+
+.quick-action-btn {
+    display: inline-flex;
+    align-items: center;
+    background: #003c91;
+    border: none;
+    border-radius: 4px;
+    padding: 9px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+    font-size: 0.85rem;
+}
+
+.quick-action-btn:hover {
+    background: #002c70; /* Darker shade for hover */
+    transform: translateY(-1px);
+}
+
+.quick-action-btn img {
+    width: 16px; /* Smaller 16px icons */
+    height: 16px;
+    margin-right: 0.5rem;
+    filter: brightness(0) invert(1); /* Make icons white */
+}
+
+
+/* ----------------------------- */
+/* Recent Translation Styles     */
+/* ----------------------------- */
+
+.recent-translations {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    margin-right: 20px;
+}
+
+.recent-translations h3 {
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* View toggle buttons */
+.view-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.view-toggle button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.view-toggle button:hover {
+    transform: scale(1.1);
+}
+
+.viewIcons {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+/* ----------------------------- */
+/* LIST VIEW styles              */
+/* ----------------------------- */
+
+/* Table header container */
+.table-header {
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    background: #f5f5f5;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    border: 1px solid rgb(196, 196, 196);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 30px;
+}
+
+/* header file name */
+.table-header .header-title {
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    align-items: center;
+    flex: 2;
+    font-size: 16px;
+}
+
+/* header last modified */
+.table-header .header-date {
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    align-items: center;
+    flex: 1;
+    font-size: 16px;
+}
+
+
+/* List item styles */
+#docList.listView .listItem {
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgb(196, 196, 196);
+    border-top: none;
+    align-items: center;
+    cursor: pointer;
+    background: white;
+    transition: background-color 0.2s ease;
+}
+
+#docList.listView .listItem:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+#docList.listView .listItem:hover {
+    background-color: #f0f4ff;
+}
+
+/* Document icon */
+#docList.listView img.document-image {
+    width: 15px;
+    height: 18px;
+    margin-right: 16px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+/* Document file name and image */
+#docList.listView .doc-file {
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    align-items: center;
+    flex: 2;
+    font-size: 16px;
+}
+
+/* Document date */
+#docList.listView .doc-date {
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    align-items: center;
+    flex: 1;
+    font-size: 16px;
+    color: #666;
+}
+
+
+/* ----------------------------- */
+/* GRID VIEW styles              */
+/* ----------------------------- */
+#docList.gridView {
+    /* Turn the container into a grid */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    row-gap: 30px;
+    column-gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#docList.gridView .listItem {
+    /* makes "cards" in grid view */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+    height: auto;
+    cursor: pointer;
+    background: #ebebeb;
+    border-radius: 8px;
+    border: 1px solid rgb(196, 196, 196);
+}
+
+#docList.gridView .listItem:hover {
+    background-color: #dddddd;
+}
+
+/* Document file name and image */
+#docList.gridView .doc-file {
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+/* Document date */
+#docList.gridView .doc-date {
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    align-items: center;
+    font-size: 13px;
+    color: #666;
+}
+
+/* Document icon */
+#docList.gridView img.document-image {
+    width: 15px;
+    height: 18px;
+    margin-right: 16px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+/* The three-dot button */
+.menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: block;
+}
+
+/* The dropdown menu container */
+.dropdown-menu {
+    position: absolute; /* not relative! */
+    right: 30px;
+    margin-top: -15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 9999;
+    min-width: 120px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+
+/* Each dropdown item (now an <a>) */
+.dropdown-option {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Hover effect for each dropdown item */
+.dropdown-option:hover {
+    background-color: #f0f0f0;
+}
+
+.listItem {
+    position: relative;
+    overflow: visible;
+}
+
+#docList.listView .dropdown-button {
+    position:top;
+    background: transparent;
+    border: none;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+#docList.listView .dropdown-container {
+    position: absolute;
+    z-index: 1000;             /* make sure it's on top */
+    pointer-events: auto;
+    top: 50%; /* Vertically center the container */
+    right: 15px;
+    transform: translateY(-50%);
+}
+
+#docList.gridView .dropdown-container {
+    position: absolute;
+    z-index: 1000;             /* make sure it's on top */
+    pointer-events: auto;
+    top: 20px; /* Vertically center the container */
+    right: 8px;
+}
+
+#docList.gridView .dropdown-button {
+    position:top;
+    background: transparent;
+    border: none;
+    padding-left: 16px;
+    padding-right: 14px;
+    cursor: pointer;
+}
+
+
+.grid-only {
+    display: none;
+}
+
+.gridView .grid-only {
+    display: block;
+}
+
+.gridView .listItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+    height: 100%; /* helps ensure content doesn’t leak out */
+}
+
+.code-preview {
+    background-color: #f4f4f4;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: #333;
+    padding: 8px;
+    border-radius: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap; /* wrap long lines */
+    word-wrap: break-word;  /* break long tokens */
+    height: 80px;
+    overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+    overflow-wrap:anywhere;
+}
+
+/* view all translations button */
+.view-all-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    margin-right: 15px;
+}
+
+.view-all {
+    display: inline-block;
+    color: #2c4b6d;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease-in-out;
+    margin-bottom: 30px;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+.content {
+    height: 100%;
+}
+
