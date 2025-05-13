@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My_Application</string>
+    <string-array name="difficulty">
+        <item>Please choose a difficulty</item>
+        <item>Easy (3 Lives)</item>
+        <item>Medium (2 Lives)</item>
+        <item>Difficult (1 Life)</item>
+    </string-array>
+</resources>
