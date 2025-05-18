@@ -13,8 +13,6 @@ A system that automates the translation of Delphi code to C#, including a file m
 ### [Prison Break Game](Prison%20Break%20Game)
 Classic Frogger game spinoff in the style of a prison break.
 
-**Key Technologies: Android Studio, Java, JUnits
-
 
 ---
 
